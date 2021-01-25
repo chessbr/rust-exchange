@@ -10,3 +10,5 @@ pub use {
     order_result::OrderType,
     order_result::OrderResultType
 };
+
+pub mod tests;
