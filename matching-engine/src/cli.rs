@@ -2,17 +2,17 @@ use std::env;
 use std::io;
 
 mod engine;
-use { engine::MatchingEngine, engine::Order, engine::OrderType, engine::OrderResult };
+use engine::{MatchingEngine, OrderType, OrderResult};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
     let asset: &String = &args[1];
 
-    println!("Starting matching engine for {}", asset);
-    let engine = MatchingEngine::new(asset.to_string());
+    println!("\n\n*** Starting matching engine for {} ***\n\n", asset);
+    let mut engine = MatchingEngine::new(asset.to_string());
 
     loop {
-        println!("Enter your order command in the format: BUY|SELL QTY PRICE");
+        println!("Enter your order command in the format: BUY|SELL QTY PRICE\n");
 
         let mut command: String = String::new();
         io::stdin().read_line(&mut command).expect("Failed to read you order command");
@@ -41,9 +41,11 @@ fn main() {
             continue;
         }
 
-        println!("Received an order for asset {:?} {:?} units for {:?}", order_type, qty, price);
+        let results: Vec<OrderResult> = engine.add_order(order_type_enum, qty, price);
 
-        let order = Order::new(order_type_enum, qty, price);
-        let results: Vec<OrderResult> = engine.add_order(&order);
+        for result in results {
+            println!("Order {:?} => {:?} x {:?}", result.result_type, result.quantity, result.price);
+        }
+        println!("");
     }
 }
