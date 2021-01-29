@@ -1,12 +1,12 @@
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub enum OrderResultType {
     QUEUED,
-    EXECUTED
+    EXECUTED,
 }
-#[derive(Debug, PartialEq, Eq)]
+#[derive(Debug, PartialEq, Eq, Clone)]
 pub enum OrderType {
     BUY,
-    SELL
+    SELL,
 }
 #[derive(Debug)]
 pub struct OrderResult {
