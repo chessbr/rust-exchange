@@ -71,7 +71,6 @@ impl MatchingEngine {
 
         // add the order to the book as we don't have any others to match
         let order_place = MatchingEngine::find_order_place(order_book, order);
-        println!("Place: {:?}", order_place);
 
         if order_place.is_some() {
             order_book.insert(order_place.unwrap(), order.clone());
