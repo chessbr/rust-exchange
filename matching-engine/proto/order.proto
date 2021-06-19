@@ -1,0 +1,41 @@
+syntax = "proto3";
+package matching_engine;
+
+service MacthingEngineOrderService {
+    rpc SendOrder (OrderRequest) returns (OrderResponse);
+}
+
+service MacthingEngineBookService {
+    rpc GetBook (BookRequest) returns (BookResponse);
+}
+
+enum OrderType {
+    BUY = 0;
+    SELL = 1;
+}
+
+message OrderRequest {
+    string asset_code = 1;
+    OrderType order_type = 2;
+    int64 quantity = 3;
+    float price = 4;
+}
+
+message OrderResponse {
+    bool ok = 1;
+    optional string error = 2;
+}
+
+message BookOrder {
+    OrderType order_type = 1;
+    int64 quantity = 2;
+    float price = 3;
+}
+
+message BookRequest {
+    string asset_code = 1;
+}
+
+message BookResponse {
+    repeated BookOrder orders = 1;
+}
