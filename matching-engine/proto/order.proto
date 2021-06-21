@@ -1,11 +1,11 @@
 syntax = "proto3";
-package matching_engine;
+package order_protobuf;
 
-service MacthingEngineOrderService {
+service OrderService {
     rpc SendOrder (OrderRequest) returns (OrderResponse);
 }
 
-service MacthingEngineBookService {
+service BookService {
     rpc GetBook (BookRequest) returns (BookResponse);
 }
 
@@ -17,13 +17,13 @@ enum OrderType {
 message OrderRequest {
     string asset_code = 1;
     OrderType order_type = 2;
-    int64 quantity = 3;
+    uint64 quantity = 3;
     float price = 4;
 }
 
 message OrderResponse {
     bool ok = 1;
-    optional string error = 2;
+    string error = 2;
 }
 
 message BookOrder {
