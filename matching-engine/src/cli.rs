@@ -6,6 +6,12 @@ use engine::{MatchingEngine, OrderType, OrderResult};
 
 fn main() {
     let args: Vec<String> = env::args().collect();
+
+    if args.len() != 2 {
+        println!("It is missing the asset code from your command.");
+        return;
+    }
+
     let asset: &String = &args[1];
 
     println!("\n\n*** Starting matching engine for {} ***\n\n", asset);
